@@ -1,0 +1,16 @@
+.episode {
+  padding: var(--size-2);
+  margin-bottom: var(--size-3);
+  background-color: #bfd;
+  font-size: 20px;
+  border: 2px solid;
+  border-radius: var(--size-2);
+}
+
+li.episode {
+  border-color: transparent;
+}
+
+input.episode {
+  width: calc(100% - 10px);
+}

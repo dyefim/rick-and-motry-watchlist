@@ -1,8 +1,10 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
-	padding: 0;
-	border: 0;
+  padding: 0;
+  border: 0;
   color: #345;
 }
 
@@ -20,31 +22,11 @@ code {
     monospace;
 }
 
-.navigation {
-  width: auto;
-  background-color: #2f7;
-}
-
-.navigation {
-  padding: 10px;
-}
-
-.navigation ul {
-  display: flex;
-  flex-direction: row;
+ul {
   list-style: none;
 }
 
-.navigation li {
-  margin: 5px;
-  padding: 5px 10px;
-  text-transform: capitalize;
-  font-size: 18px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.navigation li.active {
-  color: snow;
-  background-color: #345;
+.Main {
+  padding: 10px;
+  padding-top: 100px;
 }

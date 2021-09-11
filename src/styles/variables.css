@@ -1,0 +1,9 @@
+:root {
+  --size-base: 4px;
+  --size-1: var(--size-base);
+  --size-2: calc(var(--size-base) * 2);
+  --size-3: calc(var(--size-base) * 3);
+  --size-4: calc(var(--size-base) * 4);
+  --size-5: calc(var(--size-base) * 5);
+  --size-6: calc(var(--size-base) * 6);
+}

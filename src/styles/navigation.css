@@ -1,0 +1,30 @@
+.navigation {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-color: #2f7;
+}
+
+.navigation {
+  padding: 10px;
+}
+
+.navigation ul {
+  display: flex;
+  flex-direction: row;
+}
+
+.navigation li {
+  margin: 5px;
+  padding: 5px 10px;
+  text-transform: capitalize;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.navigation li.active {
+  color: snow;
+  background-color: #345;
+}

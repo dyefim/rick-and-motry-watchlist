@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Episode from './Episode';
 
 const episodesUrl = 'https://rickandmortyapi.com/api/episode';
 
@@ -15,7 +16,7 @@ export interface ApiResponse<R> {
   error?: string;
 }
 
-interface Episode {
+export interface EpisodeType {
   id: number;
   name: string;
   air_date: string;
@@ -26,7 +27,7 @@ interface Episode {
 }
 
 function Episodes() {
-  const [episodes, setEpisodes] = useState<Episode[]>([]);
+  const [episodes, setEpisodes] = useState<EpisodeType[]>([]);
 
   useEffect(() => {
     const requestEpisodes = async (url = episodesUrl) => {
@@ -34,7 +35,7 @@ function Episodes() {
         const response = await fetch(url);
 
         const { info, results, error } =
-          (await response.json()) as ApiResponse<Episode>;
+          (await response.json()) as ApiResponse<EpisodeType>;
 
         if (error) {
           return console.error(`Error when fetching ${url}. ${error}`);
@@ -57,11 +58,10 @@ function Episodes() {
 
   return (
     <div className="episodes-page">
-      <h1>Episodes</h1>
       <ul>
-        {episodes?.map((episode) => {
-          return <li key={episode.episode}>{episode.episode}</li>;
-        })}
+        {episodes?.map((episode) => (
+          <Episode episode={episode} key={episode.episode} />
+        ))}
       </ul>
     </div>
   );
