@@ -12,7 +12,7 @@ function App() {
         activeTab={activePage}
         setActiveTab={setActivePage}
       />
-      {PAGES[activePage]}
+      <div className="container">{PAGES[activePage]}</div>
     </div>
   );
 }
