@@ -56,11 +56,19 @@ function Episodes() {
     requestEpisodes();
   }, []);
 
+  const deleteEpisode = (id: number) => {
+    setEpisodes((episodes) => episodes.filter((episode) => episode.id !== id));
+  };
+
   return (
     <div className="episodes-page">
       <ul>
         {episodes?.map((episode) => (
-          <Episode episode={episode} key={episode.episode} />
+          <Episode
+            episode={episode}
+            remove={() => deleteEpisode(episode.id)}
+            key={episode.episode}
+          />
         ))}
       </ul>
     </div>

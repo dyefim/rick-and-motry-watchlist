@@ -1,16 +1,60 @@
 .episode {
-  padding: var(--size-2);
+  box-shadow: 0 2px 4px #777;
   margin-bottom: var(--size-3);
-  background-color: #bfd;
+}
+
+.episode,
+.episode-input {
+  width: 100%;
+  padding: var(--size-3);
+  background-color: #def;
   font-size: 20px;
-  border: 2px solid;
+  /* border: 2px solid; */
+  /* border-color: transparent; */
   border-radius: var(--size-2);
 }
 
-li.episode {
-  border-color: transparent;
+.episode-input {
+  border-radius: var(--size-2) var(--size-2) 0 0;
+  background-color: #fff;
+  outline: none;
 }
 
-input.episode {
-  width: calc(100% - 10px);
+.episode.editable {
+  padding: 0;
+}
+
+.episode .header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.episode .header span {
+  color: var(--text-color-lighter);
+  font-size: 16px;
+  font-style: italic;
+}
+
+.editable.episode .buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.editable.episode .buttons button {
+  padding: var(--size-3);
+  font-size: 16px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.editable.episode button.save {
+  background-color: #57f;
+  border-end-start-radius: var(--size-2);
+}
+
+.editable.episode button.delete {
+  background-color: #f57;
+  border-end-end-radius: var(--size-2);
 }

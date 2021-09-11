@@ -6,4 +6,7 @@
   --size-4: calc(var(--size-base) * 4);
   --size-5: calc(var(--size-base) * 5);
   --size-6: calc(var(--size-base) * 6);
+
+  --text-color: #345;
+  --text-color-lighter: #789;
 }

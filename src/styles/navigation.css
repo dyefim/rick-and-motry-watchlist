@@ -3,11 +3,13 @@
   width: 100%;
   left: 0;
   top: 0;
-  background-color: #2f7;
+  background-color: #334;
 }
 
 .navigation {
   padding: 10px;
+  box-shadow: 0 0 8px 1px #334;
+  z-index: 10;
 }
 
 .navigation ul {
@@ -16,15 +18,17 @@
 }
 
 .navigation li {
-  margin: 5px;
-  padding: 5px 10px;
+  margin: var(--size-1);
+  padding: var(--size-2) var(--size-3);
+  color: #eee;
+
   text-transform: capitalize;
-  font-size: 18px;
-  border-radius: 5px;
+  font-size: 20px;
+  border-radius: var(--size-2);
   cursor: pointer;
 }
 
 .navigation li.active {
-  color: snow;
-  background-color: #345;
+  background-color: #eee;
+  color: black;
 }

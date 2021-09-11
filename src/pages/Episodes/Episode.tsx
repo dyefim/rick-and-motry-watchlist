@@ -1,15 +1,18 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { EpisodeType } from './index';
 
 interface Props {
   episode: EpisodeType;
+  remove: () => void;
 }
 
-const Episode = ({ episode }: Props) => {
-  const [value, setValue] = useState(episode.name);
+const Episode = ({ episode, remove }: Props) => {
+  const [title, setTitle] = useState(episode.name);
+  const [value, setValue] = useState('');
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleClick = (event: React.MouseEvent) => {
+  const edit = (event: React.MouseEvent) => {
+    setValue(title);
     setIsEditing(true);
   };
 
@@ -18,23 +21,57 @@ const Episode = ({ episode }: Props) => {
   };
 
   const save = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    setTitle(value);
+    setValue('');
     setIsEditing(false);
   };
 
-  return isEditing ? (
+  const cancelEditing = (event: any) => {
+    if (event.relatedTarget) {
+      return;
+    }
+
+    setIsEditing(false);
+  };
+
+  const editable = (
     <form onSubmit={save}>
       <input
-        className="episode"
+        className="episode-input"
         type="text"
         autoFocus
         value={value}
         onChange={handleChange}
-        onBlur={save}
+        onBlur={cancelEditing}
       />
+      <div className="buttons">
+        <button type="submit" className="save">
+          save
+        </button>
+        <button type="button" onClick={remove} className="delete">
+          delete
+        </button>
+      </div>
     </form>
-  ) : (
-    <li className="episode" onClick={handleClick}>
-      {value}
+  );
+
+  const episodeCard = (
+    <div>
+      <div className="header">
+        <span>{episode.episode}</span>
+        <span>{episode.air_date}</span>
+      </div>
+      <div onClick={edit} className="title">
+        {title}
+      </div>
+    </div>
+  );
+
+  return (
+    <li className={`episode ${isEditing ? 'editable' : ''}`}>
+      {isEditing ? editable : episodeCard}
     </li>
   );
 };
