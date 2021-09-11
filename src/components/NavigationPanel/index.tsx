@@ -1,20 +1,20 @@
-import { TabType } from '../../App';
+import { PageType } from '../../pages';
 import NavigationButton from './NavigationButton';
 
 interface Props {
-  tabList: TabType[];
+  tabList: PageType[];
   activeTab: string;
-  setActivetab: (tab: TabType) => void;
+  setActiveTab: (tab: PageType) => void;
 }
 
-const NavigationPanel = ({ tabList, activeTab, setActivetab }: Props) => {
+const NavigationPanel = ({ tabList, activeTab, setActiveTab }: Props) => {
   return (
     <nav className="navigation">
       <ul>
         {tabList.map((tab) => (
           <NavigationButton
             tab={tab}
-            handleChangeTab={() => setActivetab(tab)}
+            handleChangeTab={() => setActiveTab(tab)}
             isActive={tab === activeTab}
             key={tab}
           />
