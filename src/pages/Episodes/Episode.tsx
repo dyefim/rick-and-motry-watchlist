@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { renameEpisode } from '../../reducers/episodes';
-import { EpisodeType } from './index';
+import { EpisodeType } from '../../types';
 
 interface Props {
   episode: EpisodeType;
