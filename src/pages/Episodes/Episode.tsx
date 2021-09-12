@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { renameEpisode } from '../../reducers/episodes';
 import { EpisodeType } from '../../types';
+import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 
 interface Props {
   episode: EpisodeType;
@@ -65,8 +66,11 @@ const Episode = ({ episode, remove }: Props) => {
         <span>{episode.episode}</span>
         <span>{episode.air_date}</span>
       </div>
-      <div onClick={edit} className="title">
-        {episode.name}
+      <div onClick={edit} className="title-row">
+        <p>{episode.name}</p>
+        <button onClick={remove} className="trashcan-button">
+          <DeleteIcon />
+        </button>
       </div>
     </div>
   );

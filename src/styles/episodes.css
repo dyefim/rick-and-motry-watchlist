@@ -58,3 +58,17 @@
   background-color: #f57;
   border-end-end-radius: var(--size-2);
 }
+
+.episode .title-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.trashcan-button {
+  background-color: transparent;
+  padding: var(--size-1);
+}
+
+.trashcan-button svg {
+  fill: #f57;
+}
