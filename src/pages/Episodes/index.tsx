@@ -1,13 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import {
-  fetchEpisodes,
-  selectEpisodes,
-  deleteEpisode,
-} from '../../reducers/episodes';
+import { fetchEpisodes, selectEpisodes } from '../../reducers/episodes';
 import Episode from './Episode';
-
-
 
 function Episodes() {
   const dispatch = useAppDispatch();
@@ -17,19 +11,11 @@ function Episodes() {
     dispatch(fetchEpisodes());
   }, [dispatch]);
 
-  const remove = (id: string) => {
-    dispatch(deleteEpisode(id));
-  };
-
   return (
     <div className="episodes-page">
       <ul>
         {Object.entries(episodes)?.map(([id, episode]) => (
-          <Episode
-            episode={episode}
-            remove={() => remove(id)}
-            key={episode.episode}
-          />
+          <Episode episode={episode} key={episode.episode} />
         ))}
       </ul>
     </div>
