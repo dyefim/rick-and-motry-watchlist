@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchEpisodes, selectEpisodes } from '../../reducers/episodes';
 import Episode from './Episode';
-
-const episodesUrl = 'https://rickandmortyapi.com/api/episode';
 
 interface Info {
   count: number;
@@ -27,37 +27,16 @@ export interface EpisodeType {
 }
 
 function Episodes() {
-  const [episodes, setEpisodes] = useState<EpisodeType[]>([]);
+  const dispatch = useAppDispatch();
+  const episodes = useAppSelector(selectEpisodes);
+  // const [episodes, setEpisodes] = useState<EpisodeType[]>([]);
 
   useEffect(() => {
-    const requestEpisodes = async (url = episodesUrl) => {
-      try {
-        const response = await fetch(url);
-
-        const { info, results, error } =
-          (await response.json()) as ApiResponse<EpisodeType>;
-
-        if (error) {
-          return console.error(`Error when fetching ${url}. ${error}`);
-        }
-
-        if (results?.length) {
-          setEpisodes((episodes) => [...episodes, ...results]);
-        }
-
-        if (info?.next) {
-          requestEpisodes(info.next);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    requestEpisodes();
-  }, []);
+    dispatch(fetchEpisodes());
+  }, [dispatch]);
 
   const deleteEpisode = (id: number) => {
-    setEpisodes((episodes) => episodes.filter((episode) => episode.id !== id));
+    // setEpisodes((episodes) => episodes.filter((episode) => episode.id !== id));
   };
 
   return (
