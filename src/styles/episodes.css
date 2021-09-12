@@ -9,8 +9,6 @@
   padding: var(--size-3);
   background-color: #def;
   font-size: 20px;
-  /* border: 2px solid; */
-  /* border-color: transparent; */
   border-radius: var(--size-2);
 }
 
