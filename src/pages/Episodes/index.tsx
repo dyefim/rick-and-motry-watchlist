@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchEpisodes, selectEpisodes } from '../../reducers/episodes';
+import {
+  fetchEpisodes,
+  selectEpisodes,
+  deleteEpisode,
+} from '../../reducers/episodes';
 import Episode from './Episode';
 
 interface Info {
@@ -35,8 +39,8 @@ function Episodes() {
     dispatch(fetchEpisodes());
   }, [dispatch]);
 
-  const deleteEpisode = (id: number) => {
-    // setEpisodes((episodes) => episodes.filter((episode) => episode.id !== id));
+  const remove = (id: number) => {
+    dispatch(deleteEpisode(id));
   };
 
   return (
@@ -45,7 +49,7 @@ function Episodes() {
         {episodes?.map((episode) => (
           <Episode
             episode={episode}
-            remove={() => deleteEpisode(episode.id)}
+            remove={() => remove(episode.id)}
             key={episode.episode}
           />
         ))}

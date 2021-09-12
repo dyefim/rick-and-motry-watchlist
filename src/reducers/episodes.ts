@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { EpisodeType } from '../pages/Episodes'; // TODO declare it here
 import type { RootState } from '../store/types';
 
@@ -57,7 +57,11 @@ const initialState: EpisodesState = {
 const episodesSlice = createSlice({
   name: 'episodes',
   initialState,
-  reducers: {},
+  reducers: {
+    deleteEpisode(state, action: PayloadAction<number>) {
+      state.list = state.list.filter((episode) => episode.id !== action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchEpisodes.pending, (state) => {
       state.status = 'pending';
@@ -73,6 +77,8 @@ const episodesSlice = createSlice({
     });
   },
 });
+
+export const { deleteEpisode } = episodesSlice.actions;
 
 export const selectEpisodes = (state: RootState) => state.episodes.list;
 
