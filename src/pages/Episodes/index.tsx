@@ -39,17 +39,17 @@ function Episodes() {
     dispatch(fetchEpisodes());
   }, [dispatch]);
 
-  const remove = (id: number) => {
+  const remove = (id: number | string) => {
     dispatch(deleteEpisode(id));
   };
 
   return (
     <div className="episodes-page">
       <ul>
-        {episodes?.map((episode) => (
+        {Object.entries(episodes)?.map(([id, episode]) => (
           <Episode
             episode={episode}
-            remove={() => remove(episode.id)}
+            remove={() => remove(id)}
             key={episode.episode}
           />
         ))}

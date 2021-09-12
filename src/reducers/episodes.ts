@@ -46,20 +46,20 @@ export const fetchEpisodes = createAsyncThunk<
 
 interface EpisodesState {
   status?: string;
-  list: EpisodeType[];
+  list: Record<number | string, EpisodeType>;
 }
 
 const initialState: EpisodesState = {
   status: '',
-  list: [],
+  list: {},
 };
 
 const episodesSlice = createSlice({
   name: 'episodes',
   initialState,
   reducers: {
-    deleteEpisode(state, action: PayloadAction<number>) {
-      state.list = state.list.filter((episode) => episode.id !== action.payload);
+    deleteEpisode(state, action: PayloadAction<number | string>) {
+      delete state.list[action.payload];
     },
   },
   extraReducers: (builder) => {
@@ -72,7 +72,9 @@ const episodesSlice = createSlice({
     builder.addCase(fetchEpisodes.fulfilled, (state, { payload }) => {
       state.status = 'fulfilled';
       if (Array.isArray(payload.results)) {
-        state.list.push(...payload.results);
+        payload.results.forEach((episode) => {
+          state.list[episode.id] = episode;
+        });
       }
     });
   },
