@@ -21,7 +21,7 @@ export interface ApiResponse<R> {
 }
 
 export interface EpisodeType {
-  id: number;
+  id: string;
   name: string;
   air_date: string;
   episode: string;
@@ -33,13 +33,12 @@ export interface EpisodeType {
 function Episodes() {
   const dispatch = useAppDispatch();
   const episodes = useAppSelector(selectEpisodes);
-  // const [episodes, setEpisodes] = useState<EpisodeType[]>([]);
 
   useEffect(() => {
     dispatch(fetchEpisodes());
   }, [dispatch]);
 
-  const remove = (id: number | string) => {
+  const remove = (id: string) => {
     dispatch(deleteEpisode(id));
   };
 

@@ -46,7 +46,7 @@ export const fetchEpisodes = createAsyncThunk<
 
 interface EpisodesState {
   status?: string;
-  list: Record<number | string, EpisodeType>;
+  list: { [id: string]: EpisodeType };
 }
 
 const initialState: EpisodesState = {
@@ -58,7 +58,12 @@ const episodesSlice = createSlice({
   name: 'episodes',
   initialState,
   reducers: {
-    deleteEpisode(state, action: PayloadAction<number | string>) {
+    renameEpisode(state, action: PayloadAction<{ id: string; title: string }>) {
+      const { id, title } = action.payload;
+
+      state.list[id].name = title;
+    },
+    deleteEpisode(state, action: PayloadAction<string>) {
       delete state.list[action.payload];
     },
   },
@@ -71,6 +76,7 @@ const episodesSlice = createSlice({
     });
     builder.addCase(fetchEpisodes.fulfilled, (state, { payload }) => {
       state.status = 'fulfilled';
+
       if (Array.isArray(payload.results)) {
         payload.results.forEach((episode) => {
           state.list[episode.id] = episode;
@@ -80,7 +86,7 @@ const episodesSlice = createSlice({
   },
 });
 
-export const { deleteEpisode } = episodesSlice.actions;
+export const { renameEpisode, deleteEpisode } = episodesSlice.actions;
 
 export const selectEpisodes = (state: RootState) => state.episodes.list;
 

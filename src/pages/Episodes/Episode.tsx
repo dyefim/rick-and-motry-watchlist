@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useAppDispatch } from '../../hooks';
+import { renameEpisode } from '../../reducers/episodes';
 import { EpisodeType } from './index';
 
 interface Props {
@@ -7,12 +9,12 @@ interface Props {
 }
 
 const Episode = ({ episode, remove }: Props) => {
-  const [title, setTitle] = useState(episode.name);
+  const dispatch = useAppDispatch();
   const [value, setValue] = useState('');
   const [isEditing, setIsEditing] = useState(false);
 
   const edit = (event: React.MouseEvent) => {
-    setValue(title);
+    setValue(episode.name);
     setIsEditing(true);
   };
 
@@ -23,7 +25,7 @@ const Episode = ({ episode, remove }: Props) => {
   const save = (event: React.FormEvent) => {
     event.preventDefault();
 
-    setTitle(value);
+    dispatch(renameEpisode({ id: episode.id, title: value }));
     setValue('');
     setIsEditing(false);
   };
@@ -64,7 +66,7 @@ const Episode = ({ episode, remove }: Props) => {
         <span>{episode.air_date}</span>
       </div>
       <div onClick={edit} className="title">
-        {title}
+        {episode.name}
       </div>
     </div>
   );
